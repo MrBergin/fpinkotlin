@@ -3,8 +3,9 @@ plugins {
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
+    implementation(kotlin("stdlib-jdk8"))
     implementation(project(":fpinkotlin-common"))
-    implementation("io.kotest:kotest-extensions-junit5extensions:${Versions.kotestVersion}")
-    runtimeOnly("org.slf4j:slf4j-nop:${Versions.slf4JVersion}")
+    api("io.kotlintest:kotlintest-runner-junit5:${Versions.kotlintestJunitVersion}")
+    api("io.kotlintest:kotlintest-extensions:${Versions.kotlintestJunitVersion}")
+    runtimeOnly("org.slf4j:slf4j-nop:${Versions.slf4jVersion}")
 }

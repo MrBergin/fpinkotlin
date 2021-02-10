@@ -19,18 +19,21 @@ private fun Project.version() {
     version = "1.0-SNAPSHOT"
 }
 
-private fun Project.javaToolChain() {
+private fun Project.javaConfig() {
     (extensions.getByName("java") as? JavaPluginExtension)?.apply {
         toolchain.languageVersion.set(JavaLanguageVersion.of(11))
+        consistentResolution {
+            useCompileClasspathVersions()
+        }
     }
 }
+
 
 private fun Project.junitPlatform() {
     tasks.withType<Test> {
         useJUnitPlatform()
     }
 }
-
 
 private fun Project.dependencies() {
     dependencies.apply {
@@ -44,16 +47,16 @@ fun Project.configureFpInKotlinProject() {
     kotlinPlugin()
     group()
     version()
-    javaToolChain()
+    javaConfig()
     dependencies()
     junitPlatform()
 }
 
 object Versions {
-    const val kotestVersion = "4.2.6"
-    const val slf4JVersion = "1.7.25"
     const val jdomVersion = "2.0.6"
-    const val kotlinCoroutinesVersion = "1.4.2"
+    const val slf4jVersion = "1.7.25"
+    const val kotlintestJunitVersion = "3.4.2"
+    const val kotlinCoroutinesVersion = "1.3.3"
 }
 
 fun DependencyHandler.implementation(library: Any) {
